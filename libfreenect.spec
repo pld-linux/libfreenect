@@ -158,10 +158,9 @@ cd build
 %cmake .. \
 	%{?with_opencv:-DBUILD_CV=ON} \
 	-DBUILD_EXAMPLES=OFF \
-	-DBUILD_PYTHON2=ON \
-	-DBUILD_PYTHON3=ON \
-	-DBUILD_OPENNI2_DRIVER=ON \
-	-DPROJECT_LIBRARY_INSTALL_DIR=%{_lib}
+	%{?with_python2:-DBUILD_PYTHON2=ON} \
+	%{?with_python3:-DBUILD_PYTHON3=ON} \
+	%{?with_openni2:-DBUILD_OPENNI2_DRIVER=ON}
 
 %{__make}
 

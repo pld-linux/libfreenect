@@ -180,6 +180,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
+%post	opencv -p /sbin/ldconfig
+%postun	opencv -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc README.md

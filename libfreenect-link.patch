@@ -1,0 +1,11 @@
+--- libfreenect-0.6.0/OpenNI2-FreenectDriver/CMakeLists.txt.orig	2019-10-30 01:30:13.000000000 +0100
++++ libfreenect-0.6.0/OpenNI2-FreenectDriver/CMakeLists.txt	2020-03-14 21:47:22.859166045 +0100
+@@ -24,7 +24,7 @@
+ 
+ target_compile_features(FreenectDriver PUBLIC cxx_constexpr)
+ 
+-target_link_libraries(FreenectDriver freenectstatic ${MATH_LIB})
++target_link_libraries(FreenectDriver freenectstatic ${MATH_LIB} -lpthread)
+ 
+ install (TARGETS FreenectDriver
+   DESTINATION "${PROJECT_LIBRARY_INSTALL_DIR}/OpenNI2-FreenectDriver")

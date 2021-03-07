@@ -1,12 +1,12 @@
 --- libfreenect-0.6.0/wrappers/python/CMakeLists.txt.orig	2019-10-30 01:30:13.000000000 +0100
 +++ libfreenect-0.6.0/wrappers/python/CMakeLists.txt	2020-03-15 08:31:40.236407736 +0100
 @@ -50,7 +50,7 @@
- # Figure out installation path
+ # CMake populates this var automatically but we need to specify prefix
  execute_process(COMMAND
-   ${PYTHON${Python_BUILD_VERSION}_EXECUTABLE}
--    -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(prefix='${CMAKE_INSTALL_PREFIX}'))"
-+    -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(plat_specific=1, prefix='${CMAKE_INSTALL_PREFIX}'))"
-   OUTPUT_VARIABLE PYTHON${Python_BUILD_VERSION}_SITE_PACKAGES OUTPUT_STRIP_TRAILING_WHITESPACE)
+   ${Python${Python_BUILD_VERSION}_EXECUTABLE}
+-    -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(plat_specific=False, standard_lib=False, prefix='${CMAKE_INSTALL_PREFIX}'))"
++    -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(plat_specific=True, standard_lib=False, prefix='${CMAKE_INSTALL_PREFIX}'))"
+   OUTPUT_VARIABLE Python${Python_BUILD_VERSION}_SITELIB OUTPUT_STRIP_TRAILING_WHITESPACE)
  
  # Figure out numpy include path
 --- libfreenect-0.6.0/cmake_modules/SetupDirectories.cmake.orig	2019-10-30 01:30:13.000000000 +0100

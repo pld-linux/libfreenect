@@ -1,8 +1,9 @@
---- libfreenect-0.6.0/OpenNI2-FreenectDriver/CMakeLists.txt.orig	2019-10-30 01:30:13.000000000 +0100
-+++ libfreenect-0.6.0/OpenNI2-FreenectDriver/CMakeLists.txt	2020-03-14 21:47:22.859166045 +0100
-@@ -24,7 +24,7 @@
+diff -urNp -x '*.orig' libfreenect-0.6.2.org/OpenNI2-FreenectDriver/CMakeLists.txt libfreenect-0.6.2/OpenNI2-FreenectDriver/CMakeLists.txt
+--- libfreenect-0.6.2.org/OpenNI2-FreenectDriver/CMakeLists.txt	2021-02-12 00:51:27.000000000 +0100
++++ libfreenect-0.6.2/OpenNI2-FreenectDriver/CMakeLists.txt	2021-03-07 21:32:13.949845940 +0100
+@@ -24,7 +24,7 @@ include_directories(${PROJECT_SOURCE_DIR
  
- target_compile_features(FreenectDriver PUBLIC cxx_constexpr)
+ target_compile_features(FreenectDriver PUBLIC cxx_std_11 cxx_constexpr)
  
 -target_link_libraries(FreenectDriver freenectstatic ${MATH_LIB})
 +target_link_libraries(FreenectDriver freenectstatic ${MATH_LIB} -lpthread)

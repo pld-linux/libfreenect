@@ -8,13 +8,13 @@
 Summary:	Userspace driver for the Microsoft Kinect
 Summary(pl.UTF-8):	Sterownik przestrzeni użytkownika dla kontrolera Microsoft Kinect
 Name:		libfreenect
-Version:	0.6.0
-Release:	2
+Version:	0.6.2
+Release:	1
 License:	Apache v2.0 or GPL v2
 Group:		Libraries
 #Source0Download: https://github.com/OpenKinect/libfreenect/releases
 Source0:	https://github.com/OpenKinect/libfreenect/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	cc6005158c2ea4654aff31cfd3319186
+# Source0-md5:	78648c6eaa74f177a63f26b303247f6e
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-install.patch
 URL:		https://openkinect.org/wiki/Main_Page
@@ -186,9 +186,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.md
 %attr(755,root,root) %{_libdir}/libfreenect.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libfreenect.so.0.6
+%attr(755,root,root) %ghost %{_libdir}/libfreenect.so.0
 %attr(755,root,root) %{_libdir}/libfreenect_sync.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libfreenect_sync.so.0.6
+%attr(755,root,root) %ghost %{_libdir}/libfreenect_sync.so.0
 %dir %{_datadir}/libfreenect
 %{_datadir}/libfreenect/fwfetcher.py
 
@@ -206,7 +206,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/freenect-cvdemo
 %attr(755,root,root) %{_libdir}/libfreenect_cv.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libfreenect_cv.so.0.6
+%attr(755,root,root) %ghost %{_libdir}/libfreenect_cv.so.0
 %attr(755,root,root) %{_libdir}/libfreenect_cv.so
 %endif
 

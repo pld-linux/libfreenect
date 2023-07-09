@@ -8,13 +8,13 @@
 Summary:	Userspace driver for the Microsoft Kinect
 Summary(pl.UTF-8):	Sterownik przestrzeni użytkownika dla kontrolera Microsoft Kinect
 Name:		libfreenect
-Version:	0.6.2
-Release:	4
+Version:	0.6.4
+Release:	1
 License:	Apache v2.0 or GPL v2
 Group:		Libraries
 #Source0Download: https://github.com/OpenKinect/libfreenect/releases
 Source0:	https://github.com/OpenKinect/libfreenect/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	78648c6eaa74f177a63f26b303247f6e
+# Source0-md5:	a277bfd10d08ff44f4db7ac72db3c5e2
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-install.patch
 URL:		https://openkinect.org/wiki/Main_Page

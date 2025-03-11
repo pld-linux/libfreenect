@@ -147,8 +147,8 @@ Interfejs Pythona 3 do libfreenect.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+%patch -P 0 -p1
+%patch -P 1 -p1
 
 %{__sed} -i -e '1s,/usr/bin/env python2,%{__python},' src/fwfetcher.py
 

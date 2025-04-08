@@ -1,0 +1,59 @@
+--- libfreenect-0.6.4/wrappers/python/freenect.pyx.orig	2022-09-19 23:00:01.000000000 +0200
++++ libfreenect-0.6.4/wrappers/python/freenect.pyx	2025-04-07 21:11:09.510328884 +0200
+@@ -27,7 +27,7 @@ import numpy as np
+ cimport numpy as npc
+ 
+ cdef extern from "numpy/arrayobject.h":
+-    void import_array()
++    int _import_array()
+     cdef object PyArray_SimpleNewFromData(int nd, npc.npy_intp *dims,
+                                            int typenum, void *data)
+ 
+@@ -322,7 +322,7 @@ cpdef open_device(CtxPtr ctx, int index)
+ 
+ _depth_cb, _video_cb = None, None
+ 
+-cdef void depth_cb(freenect_device *dev, void *data, uint32_t timestamp) with gil:
++cdef void depth_cb(freenect_device *dev, void *data, uint32_t timestamp) noexcept with gil:
+     cdef freenect_frame_mode mode = freenect_get_current_depth_mode(dev)
+     if not mode.is_valid:
+         return
+@@ -333,7 +333,7 @@ cdef void depth_cb(freenect_device *dev,
+     pydata = _depth_cb_np(data, &mode)
+     _depth_cb(dev_out, pydata, timestamp)
+ 
+-cdef void video_cb(freenect_device *dev, void *data, uint32_t timestamp) with gil:
++cdef void video_cb(freenect_device *dev, void *data, uint32_t timestamp) noexcept with gil:
+     cdef freenect_frame_mode mode = freenect_get_current_video_mode(dev)
+     if not mode.is_valid:
+         return
+@@ -455,7 +455,7 @@ def base_runloop(CtxPtr ctx, body=None):
+     except Kill:
+         pass
+ 
+-import_array()
++_import_array()
+ 
+ cdef object _depth_cb_np(void *data, freenect_frame_mode *mode):
+     cdef npc.npy_intp dims[2]
+--- libfreenect-0.6.4/wrappers/python/CMakeLists.txt.orig	2025-04-08 19:11:43.732789333 +0200
++++ libfreenect-0.6.4/wrappers/python/CMakeLists.txt	2025-04-08 20:06:35.680538009 +0200
+@@ -15,7 +15,8 @@ else()
+   find_package(Python${Python_BUILD_VERSION} REQUIRED COMPONENTS Interpreter Development)
+ endif()
+ 
+-find_program(CYTHON_EXECUTABLE cython)
++find_program(CYTHON2_EXECUTABLE cython2)
++find_program(CYTHON3_EXECUTABLE cython3)
+ 
+ # Figure out installation path
+ # CMake populates this var automatically but we need to specify prefix
+@@ -34,7 +35,7 @@ execute_process(COMMAND
+ # How to Cython the .pyx file
+ add_custom_command(OUTPUT freenect${Python_BUILD_VERSION}.c
+   COMMAND
+-    ${CYTHON_EXECUTABLE}
++    ${CYTHON${Python_BUILD_VERSION}_EXECUTABLE}
+       -${Python_BUILD_VERSION}
+       -o freenect${Python_BUILD_VERSION}.c
+       "${CMAKE_CURRENT_SOURCE_DIR}/freenect.pyx")

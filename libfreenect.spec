@@ -9,7 +9,7 @@ Summary:	Userspace driver for the Microsoft Kinect
 Summary(pl.UTF-8):	Sterownik przestrzeni użytkownika dla kontrolera Microsoft Kinect
 Name:		libfreenect
 Version:	0.6.4
-Release:	3
+Release:	4
 License:	Apache v2.0 or GPL v2
 Group:		Libraries
 #Source0Download: https://github.com/OpenKinect/libfreenect/releases
@@ -17,6 +17,7 @@ Source0:	https://github.com/OpenKinect/libfreenect/archive/v%{version}/%{name}-%
 # Source0-md5:	a277bfd10d08ff44f4db7ac72db3c5e2
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-install.patch
+Patch2:		%{name}-cython.patch
 URL:		https://openkinect.org/wiki/Main_Page
 BuildRequires:	cmake >= 3.1.0
 BuildRequires:	libstdc++-devel >= 6:4.7
@@ -149,6 +150,7 @@ Interfejs Pythona 3 do libfreenect.
 %setup -q
 %patch -P 0 -p1
 %patch -P 1 -p1
+%patch -P 2 -p1
 
 %{__sed} -i -e '1s,/usr/bin/env python2,%{__python},' src/fwfetcher.py
 

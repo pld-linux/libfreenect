@@ -8,13 +8,13 @@
 Summary:	Userspace driver for the Microsoft Kinect
 Summary(pl.UTF-8):	Sterownik przestrzeni użytkownika dla kontrolera Microsoft Kinect
 Name:		libfreenect
-Version:	0.6.4
-Release:	5
+Version:	0.7.5
+Release:	1
 License:	Apache v2.0 or GPL v2
 Group:		Libraries
-#Source0Download: https://github.com/OpenKinect/libfreenect/releases
+#Source0Download: https://github.com/OpenKinect/libfreenect/tags
 Source0:	https://github.com/OpenKinect/libfreenect/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	a277bfd10d08ff44f4db7ac72db3c5e2
+# Source0-md5:	57d96ccf7782f88f057a638e2f66b966
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-install.patch
 Patch2:		%{name}-cython.patch
@@ -24,12 +24,12 @@ BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	libusb-devel >= 1.0.18
 %{?with_opencv:BuildRequires:	opencv-devel}
 %if %{with python2}
-BuildRequires:	python-Cython
+BuildRequires:	python-Cython >= 0.13
 BuildRequires:	python-devel >= 1:2.7
 BuildRequires:	python-numpy-devel
 %endif
 %if %{with python3}
-BuildRequires:	python3-Cython
+BuildRequires:	python3-Cython >= 0.13
 BuildRequires:	python3-devel >= 1:3.3
 BuildRequires:	python3-numpy-devel
 %endif
@@ -187,10 +187,10 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.md
-%attr(755,root,root) %{_libdir}/libfreenect.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libfreenect.so.0
-%attr(755,root,root) %{_libdir}/libfreenect_sync.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libfreenect_sync.so.0
+%{_libdir}/libfreenect.so.*.*.*
+%ghost %{_libdir}/libfreenect.so.0
+%{_libdir}/libfreenect_sync.so.*.*.*
+%ghost %{_libdir}/libfreenect_sync.so.0
 %dir %{_datadir}/libfreenect
 %{_datadir}/libfreenect/fwfetcher.py
 
@@ -199,7 +199,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/fakenect
 %attr(755,root,root) %{_bindir}/fakenect-record
 %dir %{_libdir}/fakenect
-%attr(755,root,root) %{_libdir}/fakenect/libfakenect.so*
+%{_libdir}/fakenect/libfakenect.so*
 %{_mandir}/man1/fakenect.1*
 %{_mandir}/man1/fakenect-record.1*
 
@@ -207,22 +207,22 @@ rm -rf $RPM_BUILD_ROOT
 %files opencv
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/freenect-cvdemo
-%attr(755,root,root) %{_libdir}/libfreenect_cv.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libfreenect_cv.so.0
-%attr(755,root,root) %{_libdir}/libfreenect_cv.so
+%{_libdir}/libfreenect_cv.so.*.*.*
+%ghost %{_libdir}/libfreenect_cv.so.0
+%{_libdir}/libfreenect_cv.so
 %endif
 
 %if %{with openni2}
 %files -n OpenNI2-driver-freenect
 %defattr(644,root,root,755)
 %dir %{_libdir}/OpenNI2-FreenectDriver
-%attr(755,root,root) %{_libdir}/OpenNI2-FreenectDriver/libFreenectDriver.so*
+%{_libdir}/OpenNI2-FreenectDriver/libFreenectDriver.so*
 %endif
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libfreenect.so
-%attr(755,root,root) %{_libdir}/libfreenect_sync.so
+%{_libdir}/libfreenect.so
+%{_libdir}/libfreenect_sync.so
 %{_includedir}/libfreenect
 %{_pkgconfigdir}/libfreenect.pc
 %{_datadir}/libfreenect/libfreenectConfig.cmake
@@ -235,11 +235,11 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files -n python-freenect
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/freenect.so
+%{py_sitedir}/freenect.so
 %endif
 
 %if %{with python3}
 %files -n python3-freenect
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py3_sitedir}/freenect.so
+%{py3_sitedir}/freenect.so
 %endif
